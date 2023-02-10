@@ -1,9 +1,6 @@
 # cpp_cw_2
 Computing in Finance: C++ CW 2
 
-# cpp_cw
-C++ Coursework
-
 The team members of this solutions set are:
 
 George Coxon, CID: 02274149
