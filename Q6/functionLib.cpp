@@ -6,7 +6,6 @@ Vector::Vector() : nn {0}, v {NULL} {};
 explicit Vector::Vector(int n) : nn {std::max(n, 0)} {
     if (nn) {
         v = new double[n];
-        v = {};
     }
 }
 
