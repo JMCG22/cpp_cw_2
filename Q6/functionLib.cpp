@@ -1,7 +1,7 @@
 #include "functionLib.h"
 #include "stdafx.h"
 
-Vector::Vector() : nn {0}, v {new double[0]} {};
+Vector::Vector() : nn {0}, v {NULL} {};
 
 explicit Vector::Vector(int n) : nn {std::max(n, 0)} {
     if (nn) {
