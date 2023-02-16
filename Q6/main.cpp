@@ -11,11 +11,11 @@ private:
     double *v;
 
 public:
-    Vector();                       // empty
-    explicit Vector(int n);         // zero-based array
-    Vector(int n, double a);        // initialize to constant value
-    Vector(int n, const double *a); // initialize to array
-    Vector(const Vector &rhs);      // copy constructor
+    Vector();                             // empty
+    explicit Vector(int n);               // zero-based array
+    Vector(int n, double a);              // initialize to constant value
+    Vector(int n, const double *a);       // initialize to array
+    Vector(const Vector &rhs);            // copy constructor
     Vector &operator=(const Vector &rhs); // assignment
 
     inline double &operator[](const int i); // i'th element
@@ -23,7 +23,7 @@ public:
     inline int size() const;
     void resize(int newn);           // resize (contents not preserved)
     void assign(int newn, double a); // resize and assign a constant value
-    
+
     ~Vector();
 };
 
@@ -33,7 +33,11 @@ Vector::Vector(int n) : nn{std::max(n, 0)}
 {
     if (nn)
     {
-        v = new double[n];
+        v = new double[nn];
+        for (int i = 0; i < nn; i++)
+        {
+            v[i] = 0;
+        }
     }
 }
 
@@ -159,10 +163,49 @@ Vector::~Vector()
     delete[] v;
 }
 
+void ASSERT_EQUAL(const Vector &a, const vector<double> &b);
+
+void ASSERT_EQUAL(const Vector &a, const vector<double> &b)
+{
+    if (a.size() != b.size())
+    {
+        cout << "a and b are not equal \n";
+    }
+    else if (a.size() == 0)
+    {
+        if (b.empty())
+        {
+            cout << "a and b are both empty \n";
+        }
+        else
+        {
+            cout << "a is empty but b is not \n";
+        }
+    }
+    else
+    {
+        bool diff = false;
+        for (int i = 0; i < a.size(); i++)
+        {
+            if (a[i] != b[i])
+            {
+                cout << "a and b are not equal \n";
+                diff = true;
+                break;
+            }
+        }
+
+        if (!diff)
+        {
+            cout << "a and b are equal \n";
+        }
+    }
+}
+
 int main()
 {
     Vector vec0; // empty vector
-    Vector vec(3);
+    Vector vec1(3);
     Vector vec2(3, 2.0);
 
     double temp1[3] = {1.1, 2.1, 3.1};
@@ -178,6 +221,17 @@ int main()
 
     double &double6 = vec5[1];
     cout << double6 << endl;
+
+    std::vector<double> VEC0 = {};
+    std::vector<double> VEC1 = {0., 0., 0.};
+    std::vector<double> VEC2 = {2., 2., 2.};
+    std::vector<double> VEC3 = {1.1, 2.1, 3.1};
+
+    ASSERT_EQUAL(vec0, VEC0);
+    ASSERT_EQUAL(vec1, VEC1);
+    ASSERT_EQUAL(vec2, VEC2);
+    ASSERT_EQUAL(vec2, VEC3);
+    ASSERT_EQUAL(vec5, VEC3);
 
     cout << "Size of vec5: " << vec5.size() << endl;
 
