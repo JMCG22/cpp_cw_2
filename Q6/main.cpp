@@ -205,6 +205,32 @@ void ASSERT_EQUAL(const Vector &a, const vector<double> &b, std::string name_a, 
     }
 }
 
+void ASSERT_EQUAL(const Vector &a, const Vector &b, std::string name_a, std::string name_b)
+{
+    if (a.size() != b.size())
+    {
+        cout << "Vector " << name_a << " and vector " << name_b << " are not equal \n";
+    }
+    else
+    {
+        bool diff = false;
+        for (int i = 0; i < a.size(); i++)
+        {
+            if (a[i] != b[i])
+            {
+                cout << "Vector " << name_a << " and vector " << name_b << " are not equal \n";
+                diff = true;
+                break;
+            }
+        }
+
+        if (!diff)
+        {
+            cout << "Vector " << name_a << " and vector " << name_b << " are equal \n";
+        }
+    }
+}
+
 void ASSERT_EQUAL_SIZE(int vector_size, int correct_vector_size, std::string name_vector)
 {
     if (vector_size != correct_vector_size)
@@ -257,9 +283,9 @@ int main()
     ASSERT_EQUAL(vec0, VEC0, "vec0", "VEC0"); // Check the empty vector is initialised correctly in our new class
     ASSERT_EQUAL(vec1, VEC1, "vec1", "VEC1"); // Check the zero-based vector is initialised correctly in our new class
     ASSERT_EQUAL(vec2, VEC2, "vec2", "VEC2"); // Check the constant value vector is initialised correctly in our new class
-    ASSERT_EQUAL(vec3, VEC3, "vec4", "VEC3"); // Check vector initialised to an array is correct in our new class
-    ASSERT_EQUAL(vec4, VEC3, "vec2", "VEC3"); // Check the copy constructor is correct in our new class
-    ASSERT_EQUAL(vec5, VEC3, "vec5", "VEC3"); // Check the assignment constructor is correct in our new class
+    ASSERT_EQUAL(vec3, VEC3, "vec3", "VEC3"); // Check vector initialised to an array is correct in our new class
+    ASSERT_EQUAL(vec4, vec3, "vec4", "vec3"); // Check the copy constructor is correct in our new class
+    ASSERT_EQUAL(vec5, vec3, "vec5", "vec3"); // Check the assignment constructor is correct in our new class
     ASSERT_EQUAL_INDEX(1, double6, 2.1, "vec5"); // Check the i-th element retriever is correct in our new class
     ASSERT_EQUAL_SIZE(vec5.size(), 3, "vec5"); // Check the size method is correct in our new class
 
