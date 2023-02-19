@@ -1,4 +1,5 @@
 #include "stdafx.h"
+// #include "testing.h"
 
 using namespace std;
 
@@ -31,7 +32,7 @@ Vector::Vector() : nn{0}, v{NULL} {}
 
 Vector::Vector(int n) : nn{std::max(n, 0)}
 {
-    if (nn)
+    if (nn > 0)
     {
         v = new double[nn];
         for (int i = 0; i < nn; i++)
@@ -44,7 +45,7 @@ Vector::Vector(int n) : nn{std::max(n, 0)}
 // Should we check size again? Not as nice but maybe
 Vector::Vector(int n, double a) : nn{std::max(n, 0)}
 {
-    if (nn)
+    if (nn > 0)
     {
         v = new double[nn];
         std::fill_n(v, nn, a);
@@ -53,7 +54,7 @@ Vector::Vector(int n, double a) : nn{std::max(n, 0)}
 
 Vector::Vector(int n, const double *a) : nn{std::max(n, 0)}
 {
-    if (nn)
+    if (nn > 0)
     {
         v = new double[n];
         for (int i = 0; i < nn; i++)
@@ -65,7 +66,7 @@ Vector::Vector(int n, const double *a) : nn{std::max(n, 0)}
 
 Vector::Vector(const Vector &rhs) : nn{std::max(rhs.nn, 0)}
 {
-    if (nn)
+    if (nn > 0)
     {
         v = new double[nn];
         for (int i = 0; i < nn; i++)
@@ -95,7 +96,7 @@ Vector &Vector::operator=(const Vector &rhs)
     v = nullptr;
 
     // copy the data from rhs to v
-    if (nn)
+    if (nn > 0)
     {
         v = new double[nn];
     }
@@ -138,23 +139,27 @@ inline int Vector::size() const
 void Vector::resize(int newn)
 {
 
-    if (newn)
+    if (newn > 0)
     {
         nn = newn;
         delete[] v;
         v = new double[nn];
+        for (int i = 0; i < nn; i++)
+        {
+            v[i] = 0;
+        }
     }
 }
 
 void Vector::assign(int newn, double a)
 {
 
-    if (newn)
+    if (newn > 0)
     {
         nn = newn;
         delete[] v;
         v = new double[nn];
-        v = &a;
+        std::fill_n(v, nn, a);
     }
 }
 
@@ -163,23 +168,21 @@ Vector::~Vector()
     delete[] v;
 }
 
-void ASSERT_EQUAL(const Vector &a, const vector<double> &b);
-
-void ASSERT_EQUAL(const Vector &a, const vector<double> &b)
+void ASSERT_EQUAL(const Vector &a, const vector<double> &b, std::string name_a, std::string name_b)
 {
     if (a.size() != b.size())
     {
-        cout << "a and b are not equal \n";
+        cout << "Vector " << name_a << " and vector " << name_b << " are not equal \n";
     }
     else if (a.size() == 0)
     {
         if (b.empty())
         {
-            cout << "a and b are both empty \n";
+            cout << "Vector " << name_a << " and vector " << name_b << " are both empty \n";
         }
         else
         {
-            cout << "a is empty but b is not \n";
+            cout << "Vector " << name_a << " is empty but vector " << name_b << " is not \n";
         }
     }
     else
@@ -189,7 +192,7 @@ void ASSERT_EQUAL(const Vector &a, const vector<double> &b)
         {
             if (a[i] != b[i])
             {
-                cout << "a and b are not equal \n";
+                cout << "Vector " << name_a << " and vector " << name_b << " are not equal \n";
                 diff = true;
                 break;
             }
@@ -197,45 +200,74 @@ void ASSERT_EQUAL(const Vector &a, const vector<double> &b)
 
         if (!diff)
         {
-            cout << "a and b are equal \n";
+            cout << "Vector " << name_a << " and vector " << name_b << " are equal \n";
         }
+    }
+}
+
+void ASSERT_EQUAL_SIZE(int vector_size, int correct_vector_size, std::string name_vector)
+{
+    if (vector_size != correct_vector_size)
+    {
+        cout << "The size of vector " << name_vector << " is not correct \n";
+    }
+    else
+    {
+        cout << "The size of vector " << name_vector << " is correct \n";
+    }
+}
+
+void ASSERT_EQUAL_INDEX(int vector_index, double &vector_element, double correct_element, std::string name_vector)
+{
+    if (vector_element != correct_element)
+    {
+        cout << "The element at index " << vector_index << " (" << vector_element << ") of vector " << name_vector << " is not correct \n";
+    }
+    else
+    {
+        cout << "The element at index " << vector_index << " (" << vector_element << ") of vector " << name_vector << " is correct \n";
     }
 }
 
 int main()
 {
-    Vector vec0; // empty vector
-    Vector vec1(3);
-    Vector vec2(3, 2.0);
-
-    double temp1[3] = {1.1, 2.1, 3.1};
-
-    Vector vec31(2, temp1);
-    Vector vec32(3, temp1);
-    Vector vec33(4, temp1);
-
-    Vector vec4(vec33);
-
-    Vector vec5(3);
-    vec5 = vec32;
-
-    double &double6 = vec5[1];
-    cout << double6 << endl;
-
+    // Initialise some test vectors using the C++ vector library
     std::vector<double> VEC0 = {};
     std::vector<double> VEC1 = {0., 0., 0.};
     std::vector<double> VEC2 = {2., 2., 2.};
     std::vector<double> VEC3 = {1.1, 2.1, 3.1};
+    std::vector<double> VEC4 = {0., 0., 0., 0.};
+    std::vector<double> VEC5 = {4., 4., 4., 4., 4., 4.};
 
-    ASSERT_EQUAL(vec0, VEC0);
-    ASSERT_EQUAL(vec1, VEC1);
-    ASSERT_EQUAL(vec2, VEC2);
-    ASSERT_EQUAL(vec2, VEC3);
-    ASSERT_EQUAL(vec5, VEC3);
+    // Initialise some vectors from our new vector class
+    Vector vec0; // Empty vector
+    Vector vec1(3); // Zero based vector of size 3
+    Vector vec2(3, 2.0); // Vector of size 3 with elements all equal to 2
 
-    cout << "Size of vec5: " << vec5.size() << endl;
+    double temp1[3] = {1.1, 2.1, 3.1};
 
-    cout << "end of file" << endl;
+    Vector vec3(3, temp1); // Vector initialised to array temp1
+
+    Vector vec4(vec3); // Vector copied from vec3
+    Vector vec5(3); 
+    vec5 = vec3; // Vector equal to vec3
+
+    double &double6 = vec5[1]; // Double set to the 1st element of vec5
+
+    ASSERT_EQUAL(vec0, VEC0, "vec0", "VEC0"); // Check the empty vector is initialised correctly in our new class
+    ASSERT_EQUAL(vec1, VEC1, "vec1", "VEC1"); // Check the zero-based vector is initialised correctly in our new class
+    ASSERT_EQUAL(vec2, VEC2, "vec2", "VEC2"); // Check the constant value vector is initialised correctly in our new class
+    ASSERT_EQUAL(vec3, VEC3, "vec4", "VEC3"); // Check vector initialised to an array is correct in our new class
+    ASSERT_EQUAL(vec4, VEC3, "vec2", "VEC3"); // Check the copy constructor is correct in our new class
+    ASSERT_EQUAL(vec5, VEC3, "vec5", "VEC3"); // Check the assignment constructor is correct in our new class
+    ASSERT_EQUAL_INDEX(1, double6, 2.1, "vec5"); // Check the i-th element retriever is correct in our new class
+    ASSERT_EQUAL_SIZE(vec5.size(), 3, "vec5"); // Check the size method is correct in our new class
+
+    vec5.resize(4); // vec5 resized to 4
+    ASSERT_EQUAL(vec5, VEC4, "vec5", "VEC4"); // Check the resize method is correct in our new class
+
+    vec5.assign(6, 4); // vec5 resized to 6 with constant elements 4
+    ASSERT_EQUAL(vec5, VEC5, "vec5", "VEC5"); // Check the assign method is correct in our new class
 
     return 0;
 }
