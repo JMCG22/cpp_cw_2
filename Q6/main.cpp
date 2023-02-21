@@ -231,15 +231,17 @@ void test_constant_constructor()
 
 int main()
 {
-
+    // tests for error handling
     test_negative_vector();
     test_index_out_of_bounds();
 
+    // tests for constructors
     test_default_constructor();
     test_copy_constructor();
     test_constant_constructor();
     test_array_constructor();
 
+    // othr tests
     test_assignment_operator();
 
     test_index();

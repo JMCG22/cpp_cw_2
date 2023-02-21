@@ -1,19 +1,22 @@
-
-#include "stdafx.h"
-#include "functionLib.h"
+#include "header.h"
+#include <iostream>
 
 using namespace std;
 
+
 int main()
 {
-    double price;
-    double strike = 95;
-    double spot = 100;
-    double volatility = 0.5;
-    double interestRate = 0.1;
-    double time = 0.25;
+    // initialise inputs
+    double strike = 95.0;
+    double s_0 = 100.;
+    double vol = 0.5;
+    double r = 0.1;
+    double t = 0.25;
 
-    price = blackScholesCallPrice(strike, spot, volatility, interestRate, time);
+    // calculate call price
+    double call_cost = bs_call_price(s_0, strike, vol, r, t);
 
-    cout << "The Black-Scholes option price is: " << price << "\n";
+    cout << "Call cost: " << call_cost << endl;
+
+    return 0;
 }
