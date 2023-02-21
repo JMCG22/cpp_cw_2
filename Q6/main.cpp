@@ -1,8 +1,4 @@
-#include <iostream>
-#include <cmath>
 #include "header.h"
-#include <vector>
-//Do we really need to add all the libraries again?
 
 using namespace std;
 
@@ -63,18 +59,6 @@ void ASSERT_EQUAL(const Vector &a, const Vector &b, std::string name_a, std::str
     cout << "PASSED: Vector " << name_a << " and vector " << name_b << " are equal \n";
 }
 
-void ASSERT_EQUAL_SIZE(int vector_size, int correct_vector_size, std::string name_vector)
-{
-    //I think failed and PASSED are swaped
-    if (vector_size != correct_vector_size)
-    {
-        cout << "PASSED: The size of vector " << name_vector << " is not correct \n";
-    }
-    else
-    {
-        cout << "FAILED: The size of vector " << name_vector << " is correct \n";
-    }
-}
 
 bool double_equal(double a, double b, double tol = 1e-10)
 {
