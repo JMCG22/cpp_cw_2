@@ -19,10 +19,10 @@ BlackScholesCallFunctor::BlackScholesCallFunctor(double T, double K, double S, d
 double BlackScholesCallFunctor::operator()(double sigma) const
 {
     /*
-    Calculate the price of a call option using the Black-Scholes formula
+    Calculate the price of a call option using the Black-Scholes formula, given a volatility
     */
 
-   
+
     double d1 = (log(S / K) + (r + sigma * sigma / 2) * T) / (sigma * sqrt(T));
     double d2 = d1 - sigma * sqrt(T);
 
