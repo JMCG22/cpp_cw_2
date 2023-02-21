@@ -9,7 +9,7 @@ void Vector::set_n(int n)
 {
     if (n < 0)
     {
-        throw std::invalid_argument("n must be positive");
+        throw std::invalid_argument("n negative, invalid negative size");
     }
     nn = n;
 }

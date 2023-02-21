@@ -1,3 +1,9 @@
+//functionlib.cpp
+//Definitions of functions for:
+//1)Horners Algorithm to evaluate the normal cdf
+//2)Normal cdf
+//3)Black Scholes formula.
+
 #include "functionLib.h"
 #include "stdafx.h"
 
@@ -40,13 +46,10 @@ double normCDF(double x) {
 }
 
 double blackScholesCallPrice(double strike, double spot, double volatility, double interestRate, double time) {
-
-    double std;
+   
     double d1;
     double d2;
     double price;
-
-    //std = sqrt(volatility);
 
     d1 = (1 / (volatility * sqrt(time))) * (log(spot / strike) + (interestRate + (volatility*volatility / 2)) * time);
     d2 = d1 - volatility * sqrt(time);

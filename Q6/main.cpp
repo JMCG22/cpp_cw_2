@@ -2,6 +2,7 @@
 #include <cmath>
 #include "header.h"
 #include <vector>
+//Do we really need to add all the libraries again?
 
 using namespace std;
 
@@ -64,6 +65,7 @@ void ASSERT_EQUAL(const Vector &a, const Vector &b, std::string name_a, std::str
 
 void ASSERT_EQUAL_SIZE(int vector_size, int correct_vector_size, std::string name_vector)
 {
+    //I think failed and PASSED are swaped
     if (vector_size != correct_vector_size)
     {
         cout << "PASSED: The size of vector " << name_vector << " is not correct \n";
@@ -156,7 +158,7 @@ void test_const_index()
 {
     cout << "Testing const index: ";
     const Vector vec(3);
-
+    //How is this really testing the constant porperty, Maybe we can try to modify and catch the error
     if (double_equal(vec[0], 0.0))
     {
         cout << "PASSED " << endl;

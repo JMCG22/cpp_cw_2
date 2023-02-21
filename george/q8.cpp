@@ -14,6 +14,10 @@ double interval_bisection(double y_target, double left,
 {
     // cout << "Trying to find solution to " << y_target << endl;
     // cout << "Left: "<< left << " right: " << right << endl;
+
+    //Maybe add a condition on the lenght of the interval
+    //Or number of iterations to avoid problems with ill conditioned functions
+    //Should we check the condition that f(left)*f(right)<0 Otherwise there could be no roots
     double mid, y_mid;
     do
     {
