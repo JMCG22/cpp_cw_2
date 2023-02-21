@@ -6,6 +6,10 @@ using namespace std;
 
 double normalCDF(double x)
 {
+    /*
+    Cumulative normal distribution function
+    Using the error function
+    */
     return erfc(-x / sqrt(2)) / 2;
 }
 
@@ -14,6 +18,11 @@ BlackScholesCallFunctor::BlackScholesCallFunctor(double T, double K, double S, d
 
 double BlackScholesCallFunctor::operator()(double sigma) const
 {
+    /*
+    Calculate the price of a call option using the Black-Scholes formula
+    */
+
+   
     double d1 = (log(S / K) + (r + sigma * sigma / 2) * T) / (sigma * sqrt(T));
     double d2 = d1 - sigma * sqrt(T);
 
