@@ -15,8 +15,8 @@ int main()
 
     // calculate implied volatility
     double impl_vol = interval_bisection<BlackScholesCallFunctor>(call_price, 0.0001, 10.0, 0.0001, stock, max_iter);
-    cout << "call price: " << call_price << endl;
-    cout << "implied vol: " << impl_vol << endl;
+    cout << "The Black-Scholes call price is: " << call_price << endl;
+    cout << "The implied volatility is: " << impl_vol << endl;
 
     return 0;
 }
