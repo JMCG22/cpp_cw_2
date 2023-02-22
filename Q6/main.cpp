@@ -69,11 +69,11 @@ void ASSERT_EQUAL_INDEX(Vector vector, int index, double correct_element, std::s
 {
     if (abs(vector[index] - correct_element) > 1e-10)
     {
-        cout << "PASSED: The element at index " << index << " (" << vector[index] << ") of vector " << name_vector << " is not correct \n";
+        cout << "FAILED: The element at index " << index << " (" << vector[index] << ") of vector " << name_vector << " is not correct \n";
     }
     else
     {
-        cout << "FAILED: The element at index " << index << " (" << vector[index] << ") of vector " << name_vector << " is correct \n";
+        cout << "PASSED: The element at index " << index << " (" << vector[index] << ") of vector " << name_vector << " is correct \n";
     }
 }
 
