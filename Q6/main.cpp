@@ -65,18 +65,6 @@ bool double_equal(double a, double b, double tol = 1e-10)
     return abs(a - b) < tol;
 }
 
-void ASSERT_EQUAL_INDEX(Vector vector, int index, double correct_element, std::string name_vector)
-{
-    if (abs(vector[index] - correct_element) > 1e-10)
-    {
-        cout << "FAILED: The element at index " << index << " (" << vector[index] << ") of vector " << name_vector << " is not correct \n";
-    }
-    else
-    {
-        cout << "PASSED: The element at index " << index << " (" << vector[index] << ") of vector " << name_vector << " is correct \n";
-    }
-}
-
 void test_negative_vector()
 {
     cout << "Testing negative vector size: ";
