@@ -21,7 +21,7 @@ void ASSERT_EQUAL(const Vector &a, const vector<double> &b, std::string name_a, 
         }
         else
         {
-            cout << "Failed: Vector " << name_a << " is empty but vector " << name_b << " is not \n";
+            cout << "FAILED: Vector " << name_a << " is empty but vector " << name_b << " is not \n";
         }
         return;
     }
@@ -31,7 +31,7 @@ void ASSERT_EQUAL(const Vector &a, const vector<double> &b, std::string name_a, 
     {
         if (abs(a[i] - b[i]) > 1e-10)
         {
-            cout << "Failed: Vector " << name_a << " and vector " << name_b << " are not equal \n";
+            cout << "FAILED: Vector " << name_a << " and vector " << name_b << " are not equal \n";
             return;
         }
     }
@@ -43,7 +43,7 @@ void ASSERT_EQUAL(const Vector &a, const Vector &b, std::string name_a, std::str
     // size check
     if (a.size() != b.size())
     {
-        cout << "Failed: Vector " << name_a << " and vector " << name_b << " are not equal \n";
+        cout << "FAILED: Vector " << name_a << " and vector " << name_b << " are not equal \n";
         return;
     }
 
@@ -51,7 +51,7 @@ void ASSERT_EQUAL(const Vector &a, const Vector &b, std::string name_a, std::str
     {
         if (abs(a[i] - b[i]) > 1e-10)
         {
-            cout << "Failed: Vector " << name_a << " and vector " << name_b << " are not equal \n";
+            cout << "FAILED: Vector " << name_a << " and vector " << name_b << " are not equal \n";
             return;
         }
     }
@@ -63,18 +63,6 @@ void ASSERT_EQUAL(const Vector &a, const Vector &b, std::string name_a, std::str
 bool double_equal(double a, double b, double tol = 1e-10)
 {
     return abs(a - b) < tol;
-}
-
-void ASSERT_EQUAL_INDEX(Vector vector, int index, double correct_element, std::string name_vector)
-{
-    if (abs(vector[index] - correct_element) > 1e-10)
-    {
-        cout << "PASSED: The element at index " << index << " (" << vector[index] << ") of vector " << name_vector << " is not correct \n";
-    }
-    else
-    {
-        cout << "FAILED: The element at index " << index << " (" << vector[index] << ") of vector " << name_vector << " is correct \n";
-    }
 }
 
 void test_negative_vector()
