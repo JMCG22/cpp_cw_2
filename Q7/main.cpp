@@ -16,7 +16,7 @@ int main()
     // calculate call price
     double call_cost = bs_call_price(s_0, strike, vol, r, t);
 
-    cout << "Call cost: " << call_cost << endl;
+    cout << "The Black-Scholes option price is: " << call_cost << endl;
 
     return 0;
 }
