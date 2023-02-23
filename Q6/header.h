@@ -33,7 +33,6 @@ public:
 
 inline double &Vector::operator[](const int i)
 {
-    //I think nn should be replaced by size() as we dont need to access the object properties 
     if ((i >= size()) || (i < 0))
     {
         throw std::out_of_range("Index out of bounds");
@@ -43,7 +42,6 @@ inline double &Vector::operator[](const int i)
 
 inline const double &Vector::operator[](const int i) const
 {
-    // cout << "const [] called" << endl;
     if ((i >= size()) || (i < 0))
     {
         throw std::out_of_range("Index out of bounds");
