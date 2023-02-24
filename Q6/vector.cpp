@@ -25,7 +25,6 @@ Vector::Vector(int n)
     v = new double[nn];
 }
 
-// Should we check size again? Not as nice but maybe
 Vector::Vector(int n, double a)
 {
     set_n(n);
